@@ -108,3 +108,9 @@ systemctl restart nginx
 
 echo "restarting jenkins service." && echo
 systemctl restart jenkins
+
+
+echo "Fetching Jenkins default admin password and storing it in a temporary variable." && echo
+jenkins_admin_pass=`cat /var/lib/jenkins/secrets/initialAdminPassword`
+cp /var/lib/jenkins/secrets/initialAdminPassword /.jenkins_admin_pass_file
+echo "Jenkins admin password is: $jenkins_admin_pass . Please open the link http://`hostname` on your browser, use the default password to log into Jenkins and configure your Jenkins server"
