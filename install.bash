@@ -13,82 +13,95 @@ set -e ## Exit upon the occurrence of any stderr.
 
 if [ "$(grep -Ei 'ID="centos"|CENTOS_MANTISBT_PROJECT_VERSION="7"' /etc/os-release)" ];
 then
-	echo "System has been identified as CentOS 7. Script will now begin the Installation." && echo
-	echo "Installing wget." && echo
-	yum install -y wget && echo
+	echo -e "\nScript execution starting at: `date`"
 	
-	echo "Adding repo for Jenkins." && echo
-	sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo && echo
-
-	echo "Import key to ensure that repo is secure." && echo
-	sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key && echo
-
-	echo "Perform update to ensure that packages are cached and updated." && echo
-	yum update -y && echo
-
-	echo "Install Jenkins." && echo
-	yum install -y jenkins && echo
-
-	echo "Install OpenJDK's JAVA 1.8 version." && echo
-	yum install -y java-1.8.0-openjdk && echo
-
-	echo "Enabling jenkins service to start up at system's bootup." && echo
-	systemctl enable jenkins && echo
-
-	echo "start jenkins service." && echo
-	systemctl start jenkins && echo
-
-	echo "print current status of jenkins service." && echo
-	systemctl status jenkins && echo
+	host_short=`hostname -s`
+	host_long=`hostname -f`
+	pri_ip=`hostname -I`
+	pub_ip=`hostname -i`
 	
-	echo "Install epel-release repository as a pre-req to install nginx"
-	yum install -y epel-release && echo
+	echo -e "\nFully Qualified Domain name of this system (if any) is: $host_long\nHostname of this system (if any) is: $host_short\nPrivate IP of this machine is: $pri_ip\nPublic IP of this machine is: $pub_ip"
+	
+	echo -e "\nSystem has been identified as CentOS 7. Script will now begin the Installation.\n"
+	echo -e "\nInstalling wget on $host_short \n"
+	yum install -y wget
+	
+	echo -e "\nAdding repo for Jenkins on $host_short \n"
+	sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
 
-	echo "Installing nginx for proxying the connection of port 8080 in an environment where port 8080 connections are disallowed." && echo
-	yum install -y nginx && echo
+	echo -e "\nImporting key to ensure that repo is secure on $host_short \n"
+	sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+
+	echo -e "\nPerforming update to ensure that packages are cached and updated on $host_short \n"
+	yum update -y
+
+	echo -e "\nInstalling Jenkins on $host_short \n"
+	yum install -y jenkins
+
+	echo -e "\nInstalling OpenJDK's JAVA 1.8 version on $host_short \n"
+	yum install -y java-1.8.0-openjdk
+
+	echo -e "\nEnabling jenkins service to start up at system's bootup on $host_short \n"
+	systemctl enable jenkins
+
+	echo -e "\nStarting jenkins service on $host_short \n"
+	systemctl start jenkins
+
+	echo -e "\nPrinting current status of jenkins service on $host_short \n"
+	systemctl status jenkins
+	
+	echo -e "\nInstalling epel-release repository as a pre-req to install nginx on $host_short \n"
+	yum install -y epel-release
+
+	echo -e "\nInstalling nginx on $host_short \n"
+	yum install -y nginx
 
 	dl_dir=`pwd`
 	cp $dl_dir/nginx.conf /etc/nginx/nginx.conf
 
-	echo "Enabling nginx service to start up at system's bootup." && echo
-	systemctl enable nginx && echo
+	echo -e "\nEnabling nginx service to start up at system's bootup on $host_short \n"
+	systemctl enable nginx
 
-	echo "start nginx service." && echo
-	systemctl start nginx && echo
+	echo -e "\nStarting nginx service on $host_short \n"
+	systemctl start nginx
 
-	echo "print current status of nginx service." && echo
-	systemctl status nginx && echo
+	echo -e "\nPrinting current status of nginx service on $host_short \n"
+	systemctl status nginx
 
-	echo "Install setroubleshoot-server & selinux-policy-devel to support management of SELinux." && echo 
-	yum install -y setroubleshoot-server selinux-policy-devel && echo
+	echo -e "\nInstalling setroubleshoot-server & selinux-policy-devel to support management of SELinux on $host_short \n"
+	yum install -y setroubleshoot-server selinux-policy-devel
 
-	echo "Print all ports allowed by SELinux." && echo 
-	sepolicy network -t http_port_t && echo
+	echo -e "\nPrinting all ports allowed by SELinux.\n"
+	sepolicy network -t http_port_t
 
-	echo "Allow port 8080 connections via SELinux." && echo
-	semanage port -at http_port_t -p tcp 8080 && echo
-	semanage port -mt http_port_t -p tcp 8080 && echo
+	echo -e "\nAllowing port 8080 connections via SELinux on $host_short \n"
+	##semanage port -at http_port_t -p tcp 8080## Enable this command if port 8080 is not already added/defined.
+	semanage port -mt http_port_t -p tcp 8080
 
-	echo "Print all ports allowed by SELinux." && echo 
-	sepolicy network -t http_port_t && echo
+	echo -e "\nPrinting all ports allowed by SELinux on $host_short \n"
+	sepolicy network -t http_port_t
 
-	echo "Changing SELinux level to Enforcing." && echo 
-	setenforce 1 && echo
+	echo -e "\nChanging SELinux level to Enforcing on $host_short \n"
+	setenforce 1
 
-	echo "Checking if SELinux is enabled and Enforcing." && echo 
-	getenforce && echo
+	echo -e "\nChecking if SELinux is enabled and in an Enforcing state on $host_short \n"
+	getenforce
 
-	echo "restarting nginx service." && echo
-	systemctl restart nginx && echo
+	echo -e "\nRestarting nginx service on $host_short \n"
+	systemctl restart nginx
 
 
-	echo "restarting jenkins service." && echo
-	systemctl restart jenkins && echo
+	echo -e "\nRestarting jenkins service on $host_short \n"
+	systemctl restart jenkins
+	
+	echo -e "\nChecking service status of nginx and jenkins on $host_short \n"
+	systemctl status nginx jenkins
 
-	echo "Fetching Jenkins default admin password and storing it in a temporary variable. A copy of the admin password has been stored on / and the file is called .jenkins_admin_pass_file . You can view the password by running the following command:	cat /.jenkins_admin_pass_file" && echo
+	echo -e "\nFetching Jenkins default admin password and storing it in a temporary variable. A copy of the admin password has been stored on / and the file is called .jenkins_admin_pass_file . You can view the password by running the following command:	cat /.jenkins_admin_pass_file\n"
 	jenkins_admin_pass=`cat /var/lib/jenkins/secrets/initialAdminPassword`
 	cp /var/lib/jenkins/secrets/initialAdminPassword /.jenkins_admin_pass_file
-	echo "Jenkins admin password is: $jenkins_admin_pass . Please open the link http://`hostname -f` or http://`hostname -i` on your browser, use the default password to log into Jenkins and configure your Jenkins server" && echo
+	echo -e "\nJenkins admin password is: $jenkins_admin_pass . Please open the link http://$host_long or http://$pub_ip on your internet browser, use the default password to log into Jenkins and configure your Jenkins server\n"
+	echo -e "\nScript execution ended at: `date` \n"
 else
-	echo "This is not a CentOS 7 System. Thus, the script won't work. Please contact Ali Muhammad at am900820@gmail.com if you would like to have a script developed for any other OS type or version."
+	echo -e "\nThis is not a CentOS 7 System. Thus, the script won't work. Please contact Ali Muhammad at am900820@gmail.com if you would like to have a script developed for any other OS type or version.\n"
 fi
