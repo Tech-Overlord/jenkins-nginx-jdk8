@@ -3,6 +3,44 @@
 # jenkins-nginx-jdk8
 Shell script for installation of Jenkins, OpenJDK-Java1.8 and  Nginx for reverse proxying in a secure environment or system. Also, contains additional steps to perform post the script's execution.
 
+### Audience:
+IT Professionals or enthusiasts with a focus or interest towards CI/CD/DevOps.
+
+### Key Features:
+1. Packages Update
+2. Installation of packages which include (but not limited to) **wget**, **Jenkins**, **OpenJDK-1.8 Java**, **Git**, **Nginx** & **SELinux management tools**.
+3. Modifying/managing http port 8080 using `semanage` (SELinux management tool).
+4. **Reverse proxying** of port **8080** using `Nginx`.
+
+
+## 1. Getting Started
+This section covers the steps for the execution of this script or any related information.
+
+### 1.1. Assumptions:
+1. This script requires to be executed using the `root` user.
+2. Operating System is CentOS7.
+3. CentOS has internet connectivity, can fetch packages from repositories and add repositories.
+
+### 1.2. Tested on:
+  * CentOS7 (Cloud VMs).
+  * CentOS7 (Vagrant VMs).
+  * CentOS7 (Physical system). 
+  
+### 1.3. Pre-requisites:
+There are no special pre-requisites. The only required factors have all been mentioned under [Assumptions](https://github.com/Tech-Overlord/jenkins-nginx-jdk8#11-assumptions).
+
+### 1.4. Download or Clone `jenkins-nginx-jdk8`:
+Use `root` user for the following:
+#### 1.4.1. Download `jenkins-nginx-jdk8`
+  * Download using `wget https://github.com/Tech-Overlord/jenkins-nginx-jdk8/releases/download/v1.0.0/jenkins-nginx-jdk8-1.0.0.tar.gz`.
+  * Extract it using the commands: `tar -zxf jenkins-nginx-jdk8-1.0.0.tar.gz` and then cd into extracted directory, for e.g. if the extracted directory is jenkins-nginx-jdk8-1.0.0, then do `cd jenkins-nginx-jdk8-1.0.0/` . 
+
+#### 1.4.2. Clone `jenkins-nginx-jdk8`:
+  * Clone using `git clone https://github.com/Tech-Overlord/jenkins-nginx-jdk8`
+  * Simply change into the root directory of the cloned project, for e.g. `cd /opt/jenkins-nginx-jdk8/`
+  * Do `chmod +x install.bash`  -  (This will ensure that the scripts have **execute** permissions.)
+
+
 ## Post Installation steps:
 
 ### Set BASH for `jenkins` user
