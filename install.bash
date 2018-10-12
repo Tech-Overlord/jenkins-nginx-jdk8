@@ -38,8 +38,8 @@ then
 	echo -e "\nInstalling Jenkins on $host_short \n"
 	yum install -y jenkins
 
-	echo -e "\nInstalling OpenJDK's JAVA 1.8 version on $host_short \n"
-	yum install -y java-1.8.0-openjdk
+	echo -e "\nInstalling OpenJDK's JAVA 1.8 version & Git on $host_short \n"
+	yum install -y java-1.8.0-openjdk git
 
 	echo -e "\nEnabling jenkins service to start up at system's bootup on $host_short \n"
 	systemctl enable jenkins
