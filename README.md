@@ -112,7 +112,7 @@ The key's randomart image is:
 
 #### 3.5. Copy SSH keys
 `ssh-copy-id jenkins@localhost` command will add the `jenkins` user's public SSH key to localhost.
-It will interactively ask you for the `jenkins` user's password which you will need to supply.
+It will interactively prompt you for the `jenkins` user's password just this once to confirm the authenticity, so you will need to supply `jenkins` user's password.
 
 Output sample below:
 
