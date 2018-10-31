@@ -8,9 +8,10 @@ IT Professionals or enthusiasts with a focus or interest towards CI/CD/DevOps.
 
 ### Key Features:
 1. Packages Update
-2. Installation of packages which include (but not limited to) **wget**, **Jenkins**, **OpenJDK-1.8 Java**, **Git**, **Nginx** & **SELinux management tools**.
-3. Modifying/managing http port 8080 using `semanage` (SELinux management tool).
-4. **Reverse proxying** of port **8080** using `Nginx`.
+2. Installation of epel-release repository.
+3. Installation packages which include (but not limited to) **wget**, **Jenkins**, **OpenJDK-1.8 Java**, **Git**, **Nginx** & **SELinux management tools**.
+4. Modifying/managing http port **8080** using `semanage` (SELinux management tool).
+5. **Reverse proxying** between port **8080** and port **80** using `Nginx` to facilitate accessing from external sources such as Internet browsers on port 80 and re-routing it internally to 8080. User's can access Jenkins simply using the FQDN or IPv4 address within the same network.
 
 
 ## 1. Getting Started
@@ -133,7 +134,7 @@ and check to make sure that only the key(s) you wanted were added.
 ```
 
 #### 3.6. Set `jenkins` user as a **NO PASSWORD** & `sudo` user
-Using root user, do `visudo`. Find the line that has the following contents:
+Using root user, do `visudo` so that we can modify it and add `jenkins` user as a sudoer along with permissions that will not require passwords from `jenkins` upon execution of commands. Find the line that has the following contents:
 ```shell
 root    ALL=(ALL)       ALL
 ```
