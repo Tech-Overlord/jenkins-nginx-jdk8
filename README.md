@@ -36,19 +36,51 @@ There are no special pre-requisites. The only required factors have all been men
 
 ### 1.4. Download or Clone `jenkins-nginx-jdk8`:
 Use `root` user for the following:
-#### 1.4.1. Download `jenkins-nginx-jdk8`
-  * Download using **curl** with command `curl -O https://github.com/Tech-Overlord/jenkins-nginx-jdk8/releases/download/v1.0.0/jenkins-nginx-jdk8.tar.gz` or either using **wget** with command `wget https://github.com/Tech-Overlord/jenkins-nginx-jdk8/releases/download/v1.0.0/jenkins-nginx-jdk8.tar.gz`
-  * Extract it using the commands: `tar -zxf jenkins-nginx-jdk8.tar.gz` and then cd into extracted directory, for e.g. if the extracted directory is **jenkins-nginx-jdk8**, then do `cd jenkins-nginx-jdk8/`  
-  * Do `chmod +x install.bash`  -  (This will ensure that the scripts have **execute** permissions.)
+#### 1.4.1. Download `jenkins-nginx-jdk8` and provide execute permissions:
+  1 - Download using either the `wget` or `curl` method.
+  * Download using **curl** with command: 
+  ```shell
+  curl -O https://github.com/Tech-Overlord/jenkins-nginx-jdk8/releases/download/v1.0.0/jenkins-nginx-jdk8.tar.gz
+  ```
+  Or
+  
+   * Download using **wget** with command:
+   ```shell
+   wget https://github.com/Tech-Overlord/jenkins-nginx-jdk8/releases/download/v1.0.0/jenkins-nginx-jdk8.tar.gz
+   ```
+   2 - Extract it using the commands: 
+   ```shell
+   tar -zxf jenkins-nginx-jdk8.tar.gz
+   ``` 
+   and then cd into extracted directory, for e.g. if the extracted directory is **jenkins-nginx-jdk8**, then do: 
+   ```shell
+   cd jenkins-nginx-jdk8/
+   ```  
+   3 - Execute the following commands to ensure that the scripts have **execute** permissions:
+   ```shell
+   chmod +x install.bash
+   ```
   
 #### 1.4.2. Clone `jenkins-nginx-jdk8`:
-  * Clone using `git clone https://github.com/Tech-Overlord/jenkins-nginx-jdk8`
-  * Simply change into the root directory of the cloned project, for e.g. `cd /opt/jenkins-nginx-jdk8/`
-  * Do `chmod +x install.bash`  -  (This will ensure that the scripts have **execute** permissions.)
+  1 - Clone using: 
+  ```shell
+  git clone https://github.com/Tech-Overlord/jenkins-nginx-jdk8
+  ```
+  2 - Simply change into the root directory of the cloned project, for e.g. if cloned within the root of `/opt/` , then: 
+  ```shell
+  cd /opt/jenkins-nginx-jdk8/
+  ```
+   3 - Execute the following commands to ensure that the scripts have **execute** permissions:
+   ```shell
+   chmod +x install.bash
+   ```
 
 ## 2. Installation - Script Execution
 Script execution is pretty simple once you have cloned/downloaded/extracted and supplied the appropriate executable permissions to the file. Remember that `install.bash` needs to be executed using root user.
-  * Execute using: `./install.bash`
+  * Execute using: 
+  ```shell
+  ./install.bash
+  ```
 
 Sample output of the execution will have an output more or less identical to: [install_output](https://github.com/Tech-Overlord/jenkins-nginx-jdk8/blob/master/install_output.md) 
 
@@ -57,7 +89,11 @@ Sample output of the execution will have an output more or less identical to: [i
 There are a few post installation steps that require to be performed interactively by the user. I have tried to simplify them below. So, just follow the order and enjoy!
 
 ### 3.1 Set BASH for `jenkins` user
-Installation of **Jenkins** also creates a system user called `jenkins`. By default, the user is completely non-interactive and does not have any shell/bash to utilize. Enter the command `cat /etc/passwd | grep jenkins` and you will see that the command generating a similar output as below:
+Installation of **Jenkins** also creates a system user called `jenkins`. By default, the user is completely non-interactive and does not have any shell/bash to utilize. Enter the command: 
+```shell
+cat /etc/passwd | grep jenkins
+``` 
+and you will see that the command generating a similar output as below:
 
 ```shell
 jenkins:x:993:987:Jenkins Automation Server:/var/lib/jenkins:/bin/false
@@ -65,7 +101,11 @@ jenkins:x:993:987:Jenkins Automation Server:/var/lib/jenkins:/bin/false
 
 The `jenkins:/bin/false` at the end suggests that the user does not have a shell to work with. It would be suitable to switch it **FROM** `jenkins:/bin/false` **TO** `jenkins:/bin/bash` to ensure that a shell is available for `jenkins` user. You can do so by editing the line around `jenkins` user from within `/etc/passwd` file using either vi, vim, nano or any other editors of your choice.
 
-Once you have edited `/etc/passwd`, the output from `cat /etc/passwd | grep jenkins` should look like the following:
+Once you have edited `/etc/passwd`, the output from 
+```shell
+cat /etc/passwd | grep jenkins
+``` 
+should look like the following:
 
 ```shell
 jenkins:x:993:987:Jenkins Automation Server:/var/lib/jenkins:/bin/bash
@@ -73,7 +113,11 @@ jenkins:x:993:987:Jenkins Automation Server:/var/lib/jenkins:/bin/bash
 
 ### 3.2 Create/change **password** for `jenkins` user
 
-In `root` user's shell, do `passwd jenkins`. This will ask you to set a password for jenkins password similar to the below output:
+In `root` user's shell, enter the following command: 
+```shell
+passwd jenkins
+``` 
+This will ask you to set a password for jenkins password similar to the below output:
 ```shell
 [root@buildserver ~]# passwd jenkins
 Changing password for user jenkins.
@@ -83,9 +127,17 @@ Retype new password:
 
 ### 3.3. Generate and Copy SSH keys for `jenkins` user
 
-From `root` user's shell, do `su - jenkins`. You will be switched into `jenkins` user's shell.
+From `root` user's shell, enter the command: 
+```shell
+su - jenkins
+``` 
+You will be switched into `jenkins` user's shell.
 #### 3.4. Generate SSH Keys
-Now generate keys using `ssh-keygen` command (you can just press ENTER to leave all the prompt's as default). Sample output is as the following:
+Now generate **RSA** encryption keys (public & private key pair) using  command:
+```shell
+ssh-keygen -t rsa
+```
+(You can just press ENTER to leave all the prompt's as default). Sample output is as the following:
 ```shell
 Generating public/private rsa key pair.
 Enter file in which to save the key (/var/lib/jenkins/.ssh/id_rsa):
@@ -113,8 +165,13 @@ The key's randomart image is:
 **Note**: `/var/lib/jenkins` is the home directory for `jenkins` user. Do not pay attention to the key fingerprint or the key random art in the output above as I modified that.
 
 #### 3.5. Copy SSH keys
-`ssh-copy-id jenkins@localhost` command will add the `jenkins` user's public SSH key to localhost.
+Using the `jenkins` user shell, Execute the following command:
+```shell
+ssh-copy-id jenkins@localhost
+``` 
 It will interactively prompt you for the `jenkins` user's password just this once to confirm the authenticity, so you will need to supply `jenkins` user's password.
+
+Above command will add the `jenkins` user's public SSH key to localhost. Basically it's the same as adding the **Public key** of user `jenkins` user in the `authorized_keys` file of the user `jenkins` on the system itself.
 
 Output sample below:
 
@@ -136,7 +193,11 @@ and check to make sure that only the key(s) you wanted were added.
 ```
 
 #### 3.6. Set `jenkins` user as a **NO PASSWORD** & `sudo` user
-Using root user, do `visudo` so that we can modify it and add `jenkins` user as a sudoer along with permissions that will not require passwords from `jenkins` upon execution of commands. Find the line that has the following contents:
+Using root user, do:
+ ```shell
+ visudo
+ ```
+ so that we can modify it and add `jenkins` user as a sudoer along with permissions that will not require passwords from `jenkins` upon execution of commands. Find the line that has the following contents:
 ```shell
 root    ALL=(ALL)       ALL
 ```
