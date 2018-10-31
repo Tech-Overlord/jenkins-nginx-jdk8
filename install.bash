@@ -57,7 +57,7 @@ then
 	yum install -y nginx
 
 	dl_dir=`pwd`
-	cp $dl_dir/nginx.conf /etc/nginx/nginx.conf
+	cp -R $dl_dir/nginx.conf /etc/nginx/nginx.conf
 
 	echo -e "\nEnabling nginx service to start up at system's bootup on $host_short \n"
 	systemctl enable nginx
