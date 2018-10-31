@@ -39,50 +39,50 @@ Use `root` user for the following:
 #### 1.4.1. Download `jenkins-nginx-jdk8` and provide execute permissions:
 1 - Download using either the `wget` or `curl` method.
   * Download using **curl** with command: 
-  ```shell
+```shell
   curl -O https://github.com/Tech-Overlord/jenkins-nginx-jdk8/releases/download/v1.0.0/jenkins-nginx-jdk8.tar.gz
-  ```
+```
   Or
   
    * Download using **wget** with command:
-   ```shell
+```shell
    wget https://github.com/Tech-Overlord/jenkins-nginx-jdk8/releases/download/v1.0.0/jenkins-nginx-jdk8.tar.gz
-   ```
+```
 2 - Extract it using the commands: 
-   ```shell
+```shell
    tar -zxf jenkins-nginx-jdk8.tar.gz
-   ``` 
+``` 
    and then cd into extracted directory, for e.g. if the extracted directory is **jenkins-nginx-jdk8**, then do: 
-   ```shell
+```shell
    cd jenkins-nginx-jdk8/
-   ```  
+```  
 3 - Execute the following commands to ensure that the scripts have **execute** permissions:
-   ```shell
+```shell
    chmod +x install.bash
-   ```
+```
   
 #### 1.4.2. Clone `jenkins-nginx-jdk8`:
 1 - Clone using: 
-  ```shell
+```shell
   git clone https://github.com/Tech-Overlord/jenkins-nginx-jdk8
-  ```
+```
   
 2 - Simply change into the root directory of the cloned project, for e.g. if cloned within the root of `/opt/` , then: 
-  ```shell
+```shell
   cd /opt/jenkins-nginx-jdk8/
-  ```
+```
   
 3 - Execute the following commands to ensure that the scripts have **execute** permissions:
-   ```shell
+```shell
    chmod +x install.bash
-   ```
+```
 
 ## 2. Installation - Script Execution
 Script execution is pretty simple once you have cloned/downloaded/extracted and supplied the appropriate executable permissions to the file. Remember that `install.bash` needs to be executed using root user.
   * Execute using: 
-  ```shell
+```shell
   ./install.bash
-  ```
+```
 
 Sample output of the execution will have an output more or less identical to: [install_output](https://github.com/Tech-Overlord/jenkins-nginx-jdk8/blob/master/install_output.md) 
 
