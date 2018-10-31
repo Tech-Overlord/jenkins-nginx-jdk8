@@ -1,10 +1,14 @@
 [![](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/images/0)](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/links/0)[![](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/images/1)](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/links/1)[![](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/images/2)](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/links/2)[![](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/images/3)](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/links/3)[![](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/images/4)](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/links/4)[![](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/images/5)](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/links/5)[![](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/images/6)](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/links/6)[![](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/images/7)](https://sourcerer.io/fame/Tech-Overlord/Tech-Overlord/jenkins-nginx-jdk8/links/7)
 
+
+[![license](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/Tech-Overlord/jenkins-nginx-jdk8/blob/master/LICENSE)  
+
+
 # jenkins-nginx-jdk8
-Shell script for installation of Jenkins, OpenJDK-Java1.8 and  Nginx for reverse proxying in a secure environment or system. Also, contains additional steps to perform post the script's execution.
+Shell script & package for installation of Jenkins, OpenJDK-Java1.8 and  Nginx for reverse proxying in a secure environment or system. Also, contains additional steps to perform post the script's execution.
 
 ### Audience:
-IT Professionals or enthusiasts with a focus or interest towards CI/CD/DevOps.
+IT professionals, enthusiasts or learners with a focus or interest towards CI/CD/DevOps.
 
 ### Key Features:
 1. Packages Update
@@ -33,7 +37,7 @@ There are no special pre-requisites. The only required factors have all been men
 ### 1.4. Download or Clone `jenkins-nginx-jdk8`:
 Use `root` user for the following:
 #### 1.4.1. Download `jenkins-nginx-jdk8`
-  * Download using `wget https://github.com/Tech-Overlord/jenkins-nginx-jdk8/releases/download/v1.0.0/jenkins-nginx-jdk8.tar.gz`
+  * Download using **curl** with command `curl -O https://github.com/Tech-Overlord/jenkins-nginx-jdk8/releases/download/v1.0.0/jenkins-nginx-jdk8.tar.gz` or either using **wget** with command `wget https://github.com/Tech-Overlord/jenkins-nginx-jdk8/releases/download/v1.0.0/jenkins-nginx-jdk8.tar.gz`
   * Extract it using the commands: `tar -zxf jenkins-nginx-jdk8.tar.gz` and then cd into extracted directory, for e.g. if the extracted directory is **jenkins-nginx-jdk8**, then do `cd jenkins-nginx-jdk8/`  
   * Do `chmod +x install.bash`  -  (This will ensure that the scripts have **execute** permissions.)
   
@@ -42,14 +46,12 @@ Use `root` user for the following:
   * Simply change into the root directory of the cloned project, for e.g. `cd /opt/jenkins-nginx-jdk8/`
   * Do `chmod +x install.bash`  -  (This will ensure that the scripts have **execute** permissions.)
 
-## 2. Script Execution
+## 2. Installation - Script Execution
 Script execution is pretty simple once you have cloned/downloaded/extracted and supplied the appropriate executable permissions to the file. Remember that `install.bash` needs to be executed using root user.
   * Execute using: `./install.bash`
 
 Sample output of the execution will have an output more or less identical to: [install_output](https://github.com/Tech-Overlord/jenkins-nginx-jdk8/blob/master/install_output.md) 
 
-  
-  
 
 ## 3. Post Installation steps:
 There are a few post installation steps that require to be performed interactively by the user. I have tried to simplify them below. So, just follow the order and enjoy!
@@ -144,3 +146,9 @@ Add `jenkins ALL=(ALL)       NOPASSWD: ALL` under the `root    ALL=(ALL)       A
 root    ALL=(ALL)       ALL
 jenkins ALL=(ALL)       NOPASSWD: ALL
 ```
+
+## 4. Authors
+* [Ali Muhammad](https://www.linkedin.com/in/ali-muhammad-759791130/)
+
+## 5. License
+Please see [License](https://github.com/Tech-Overlord/jenkins-nginx-jdk8/blob/master/LICENSE.md) for use or feel free to ask.
