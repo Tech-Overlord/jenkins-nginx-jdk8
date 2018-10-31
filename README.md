@@ -41,10 +41,19 @@ Use `root` user for the following:
   * Simply change into the root directory of the cloned project, for e.g. `cd /opt/jenkins-nginx-jdk8/`
   * Do `chmod +x install.bash`  -  (This will ensure that the scripts have **execute** permissions.)
 
+## 2. Script Execution
+Script execution is pretty simple once you have cloned/downloaded/extracted and supplied the appropriate executable permissions to the file. Remember that `install.bash` needs to be executed using root user.
+  * Execute using: `./install.bash`
 
-## Post Installation steps:
+Sample output of the execution will have an output more or less identical to: [install_output](https://github.com/Tech-Overlord/jenkins-nginx-jdk8/blob/master/install_output.md) 
 
-### Set BASH for `jenkins` user
+  
+  
+
+## 3. Post Installation steps:
+There are a few post installation steps that require to be performed interactively by the user. I have tried to simplify them below. So, just follow the order and enjoy!
+
+### 3.1 Set BASH for `jenkins` user
 Installation of **Jenkins** also creates a system user called `jenkins`. By default, the user is completely non-interactive and does not have any shell/bash to utilize. Enter the command `cat /etc/passwd | grep jenkins` and you will see that the command generating a similar output as below:
 
 ```shell
@@ -59,7 +68,7 @@ Once you have edited `/etc/passwd`, the output from `cat /etc/passwd | grep jenk
 jenkins:x:993:987:Jenkins Automation Server:/var/lib/jenkins:/bin/bash
 ```
 
-### Create/change **password** for `jenkins` user
+### 3.2 Create/change **password** for `jenkins` user
 
 In `root` user's shell, do `passwd jenkins`. This will ask you to set a password for jenkins password similar to the below output:
 ```shell
@@ -69,10 +78,10 @@ New password:
 Retype new password:
 ```
 
-### Generate and Copy SSH keys for `jenkins` user
+### 3.3. Generate and Copy SSH keys for `jenkins` user
 
 From `root` user's shell, do `su - jenkins`. You will be switched into `jenkins` user's shell.
-#### Generate SSH Keys
+#### 3.4. Generate SSH Keys
 Now generate keys using `ssh-keygen` command (you can just press ENTER to leave all the prompt's as default). Sample output is as the following:
 ```shell
 Generating public/private rsa key pair.
@@ -100,7 +109,7 @@ The key's randomart image is:
 
 **Note**: `/var/lib/jenkins` is the home directory for `jenkins` user. Do not pay attention to the key fingerprint or the key random art in the output above as I modified that.
 
-#### Copy SSH keys
+#### 3.5. Copy SSH keys
 `ssh-copy-id jenkins@localhost` command will add the `jenkins` user's public SSH key to localhost.
 It will interactively ask you for the `jenkins` user's password which you will need to supply.
 
@@ -123,7 +132,7 @@ Now try logging into the machine, with:   "ssh 'jenkins@localhost'"
 and check to make sure that only the key(s) you wanted were added.
 ```
 
-#### Set `jenkins` user as a **NO PASSWORD** & `sudo` user
+#### 3.6. Set `jenkins` user as a **NO PASSWORD** & `sudo` user
 Using root user, do `visudo`. Find the line that has the following contents:
 ```shell
 root    ALL=(ALL)       ALL
