@@ -32,8 +32,8 @@ There are no special pre-requisites. The only required factors have all been men
 ### 1.4. Download or Clone `jenkins-nginx-jdk8`:
 Use `root` user for the following:
 #### 1.4.1. Download `jenkins-nginx-jdk8`
-  * Download using `wget https://github.com/Tech-Overlord/jenkins-nginx-jdk8/releases/download/v1.0.0/jenkins-nginx-jdk8-1.0.0.tar.gz`
-  * Extract it using the commands: `tar -zxf jenkins-nginx-jdk8-1.0.0.tar.gz` and then cd into extracted directory, for e.g. if the extracted directory is jenkins-nginx-jdk8-1.0.0, then do `cd jenkins-nginx-jdk8-1.0.0/`  
+  * Download using `wget https://github.com/Tech-Overlord/jenkins-nginx-jdk8/releases/download/v1.0.0/jenkins-nginx-jdk8.tar.gz`
+  * Extract it using the commands: `tar -zxf jenkins-nginx-jdk8.tar.gz` and then cd into extracted directory, for e.g. if the extracted directory is **jenkins-nginx-jdk8**, then do `cd jenkins-nginx-jdk8/`  
   * Do `chmod +x install.bash`  -  (This will ensure that the scripts have **execute** permissions.)
   
 #### 1.4.2. Clone `jenkins-nginx-jdk8`:
