@@ -26,6 +26,9 @@ then
 	echo -e "\nInstalling wget on $host_short \n"
 	yum install -y wget
 	
+	echo -e "\nInstalling epel-release repository as a pre-req to install nginx on $host_short \n"
+	yum install -y epel-release
+	
 	echo -e "\nAdding repo for Jenkins on $host_short \n"
 	sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
 
@@ -49,9 +52,6 @@ then
 
 	echo -e "\nPrinting current status of jenkins service on $host_short \n"
 	systemctl status jenkins
-	
-	echo -e "\nInstalling epel-release repository as a pre-req to install nginx on $host_short \n"
-	yum install -y epel-release
 
 	echo -e "\nInstalling nginx on $host_short \n"
 	yum install -y nginx
