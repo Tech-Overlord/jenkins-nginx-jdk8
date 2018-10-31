@@ -37,7 +37,7 @@ There are no special pre-requisites. The only required factors have all been men
 ### 1.4. Download or Clone `jenkins-nginx-jdk8`:
 Use `root` user for the following:
 #### 1.4.1. Download `jenkins-nginx-jdk8` and provide execute permissions:
-  1 - Download using either the `wget` or `curl` method.
+1 - Download using either the `wget` or `curl` method.
   * Download using **curl** with command: 
   ```shell
   curl -O https://github.com/Tech-Overlord/jenkins-nginx-jdk8/releases/download/v1.0.0/jenkins-nginx-jdk8.tar.gz
@@ -48,7 +48,7 @@ Use `root` user for the following:
    ```shell
    wget https://github.com/Tech-Overlord/jenkins-nginx-jdk8/releases/download/v1.0.0/jenkins-nginx-jdk8.tar.gz
    ```
-   2 - Extract it using the commands: 
+2 - Extract it using the commands: 
    ```shell
    tar -zxf jenkins-nginx-jdk8.tar.gz
    ``` 
@@ -56,21 +56,23 @@ Use `root` user for the following:
    ```shell
    cd jenkins-nginx-jdk8/
    ```  
-   3 - Execute the following commands to ensure that the scripts have **execute** permissions:
+3 - Execute the following commands to ensure that the scripts have **execute** permissions:
    ```shell
    chmod +x install.bash
    ```
   
 #### 1.4.2. Clone `jenkins-nginx-jdk8`:
-  1 - Clone using: 
+1 - Clone using: 
   ```shell
   git clone https://github.com/Tech-Overlord/jenkins-nginx-jdk8
   ```
-  2 - Simply change into the root directory of the cloned project, for e.g. if cloned within the root of `/opt/` , then: 
+  
+2 - Simply change into the root directory of the cloned project, for e.g. if cloned within the root of `/opt/` , then: 
   ```shell
   cd /opt/jenkins-nginx-jdk8/
   ```
-   3 - Execute the following commands to ensure that the scripts have **execute** permissions:
+  
+3 - Execute the following commands to ensure that the scripts have **execute** permissions:
    ```shell
    chmod +x install.bash
    ```
